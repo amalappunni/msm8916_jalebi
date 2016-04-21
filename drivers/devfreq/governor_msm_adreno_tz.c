@@ -25,7 +25,6 @@
 #include <linux/powersuspend.h>
 #include "governor.h"
 
-
 static bool power_suspended;
 
 static DEFINE_SPINLOCK(tz_lock);
@@ -65,8 +64,7 @@ static void do_partner_stop_event(struct work_struct *work);
 static void do_partner_suspend_event(struct work_struct *work);
 static void do_partner_resume_event(struct work_struct *work);
 /* Boolean to detect if pm has entered suspend mode */
-+static bool suspended = false;
-
+static bool suspended = false;
 
 static int __secure_tz_update_entry3(unsigned int *scm_data, u32 size_scm_data,
 					int *val, u32 size_val, bool is_64)
@@ -153,7 +151,6 @@ static int tz_init(struct devfreq_msm_adreno_tz_data *priv,
 extern int adreno_idler(struct devfreq_dev_status stats, struct devfreq *devfreq,
 		 unsigned long *freq);
 #endif
-
 static int tz_get_target_freq(struct devfreq *devfreq, unsigned long *freq,
 				u32 *flag)
 {
@@ -175,7 +172,6 @@ static int tz_get_target_freq(struct devfreq *devfreq, unsigned long *freq,
 		stats.busy_time >>= 7;
 		stats.total_time >>= 7;
 	}
-
 
 	*freq = stats.current_frequency;
 	*flag = 0;
@@ -488,3 +484,4 @@ static void __exit msm_adreno_tz_exit(void)
 module_exit(msm_adreno_tz_exit);
 
 MODULE_LICENSE("GPLv2");
+
