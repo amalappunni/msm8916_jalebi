@@ -59,6 +59,7 @@
 /* sample rate */
 #define MIN_SAMPLING_RATE		10000
 #define SAMPLING_RATE			50000
+
 static void do_alucard_timer(struct work_struct *work);
 
 struct cpufreq_alucard_cpuinfo {
@@ -542,6 +543,8 @@ static void alucard_check_cpu(struct cpufreq_alucard_cpuinfo *this_alucard_cpuin
 		if (load > max_load)
 			max_load = load;
 	}
+
+        cpufreq_notify_utilization(policy, max_load);
 
 	/* CPUs Online Scale Frequency*/
 	if (policy->cur < freq_responsiveness
